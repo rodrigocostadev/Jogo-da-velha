@@ -1,0 +1,111 @@
+body{
+    text-align: center;
+    /* background-color: darkred; */
+    background-image:url(/john-fowler-RsRTIofe0HE-unsplash.jpg);
+    background-size: cover;
+}
+
+h1{
+    font-family: 'Bungee Spice', cursive;
+}
+h2{
+    font-family: 'Gluten', cursive;
+}
+/* .stage{} */
+.square{
+    width: 100px;
+    height: 100px;
+    background-color: beige;
+    border: 1px solid gray;
+    display: inline-block;
+    position: relative;
+}
+
+/* .o{} */
+.o:after{
+    content: "\1F43A";
+    font-size: 50px;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    line-height: 100px;
+}
+
+/* .x{} */
+.x:after{
+    content: "\1F98A";
+    font-size: 50px;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    line-height: 100px;
+    /* background-color: red; */
+}
+
+.section{
+    text-align: center;
+    margin-top: 20px;
+    position: relative;
+    /* background-color: blue; */
+    /* width: 50%; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.player{
+    width: 100px;
+    height: 100px;
+    background-color: beige;
+    border: 1px solid gray;
+    position: relative;
+    display: inline-block;
+    margin: 30px;
+}
+
+#lobo::before{
+    content: "\1F43A";
+    /* font-size: 50px; */
+    font-size: 50px;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    line-height: 100px;
+}
+
+#raposa::before{
+    content: "\1F98A";
+    font-size: 50px;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    line-height: 100px;
+    /* background-color: red; */
+}
+
+#button{
+    margin: 30px;
+    width: 150px;
+    height: 60px;
+    border-radius: 10px;
+    border: none;
+    /* color: white; */
+    background-color: aqua;
+    font-size: 20px;
+    font-weight: bolder;
+    font-family: 'Gluten', cursive;
+}
+
+#button:hover{
+    transform: scale(1.3);
+    transition: 200ms;
+}
