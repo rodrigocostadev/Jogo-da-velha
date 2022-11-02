@@ -11,6 +11,11 @@ h1{
 h2{
     font-family: 'Gluten', cursive;
 }
+/* ul,li{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+} */
 /* .stage{} */
 .square{
     width: 100px;
@@ -21,9 +26,17 @@ h2{
     position: relative;
 }
 
+.square:hover{
+    transform: scale(1.06);
+    transition: 200ms;
+    cursor: pointer;
+    background-color: aqua;
+}
+
 /* .o{} */
 .o:after{
     content: "\1F43A";
+    /* content:attr(data-iconp1); */
     font-size: 50px;
     top: 0;
     right: 0;
@@ -36,6 +49,7 @@ h2{
 /* .x{} */
 .x:after{
     content: "\1F98A";
+    /* content:attr(data-iconp2); */
     font-size: 50px;
     top: 0;
     right: 0;
@@ -58,6 +72,12 @@ h2{
     margin-bottom: 50px;
 }
 
+.player:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: 200ms;
+}
+
 .player{
     width: 100px;
     height: 100px;
@@ -68,9 +88,9 @@ h2{
     margin: 30px;
 }
 
-#lobo::before{
+#p1::before{
     content: "\1F43A";
-    /* font-size: 50px; */
+    /* content:attr(data-iconp1); */
     font-size: 50px;
     top: 0;
     right: 0;
@@ -80,8 +100,9 @@ h2{
     line-height: 100px;
 }
 
-#raposa::before{
+#p2::before{
     content: "\1F98A";
+    /* content:attr(data-iconp2); */
     font-size: 50px;
     top: 0;
     right: 0;
@@ -108,4 +129,73 @@ h2{
 #button:hover{
     transform: scale(1.3);
     transition: 200ms;
+    cursor: pointer;
+}
+
+.modalplayer{
+    width: 340px;
+    height: 888px;
+    display: none;
+    background-color: red;
+    /* position: absolute; */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-68%);
+    border-radius: 15px;
+    /* opacity: 0.3; */
+    position: relative;
+    overflow: hidden;
+}
+
+.s{
+    height: 30px;
+    width: 100%;
+    /* background-color: blue; */
+    position: relative;
+    margin-top: 10px
+}
+
+.squaremodal{
+    width: 100px;
+    height: 100px;
+    background-color: beige;
+    border: 1px solid gray;
+    display: inline-block;
+    position: relative;
+    /* display: grid;
+    grid-template-columns: (3, 1fr);
+    grid-template-rows: (8, 1fr);
+    justify-content: center;
+    justify-items: center; */
+}
+
+.squaremodal::before{
+    content: attr(data-icon);
+    font-size: 50px;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    line-height: 100px;
+}
+.squaremodal:hover{
+    transform: scale(1.06);
+    transition: 200ms;
+    cursor: pointer;
+}
+
+.closemodal{
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    background-image: url(cancel.png);
+    border-radius: 25px;
+    float: right;
+    cursor: pointer;
+}
+.closemodal:hover{
+    transform: scale(1.1);
+    transition: 200ms;
+    cursor: pointer;
 }

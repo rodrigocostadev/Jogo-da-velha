@@ -36,9 +36,20 @@
 
     <h2>Jogador da Vez</h2>
     <div class="section" >
-        <div id="lobo" class="player"></div>
+        <abbr title="Selecione outro jogador"><div id="p1" onclick="openmodal1()" class="player"></div></abbr>
         <input id="button" onclick="Reiniciar()" type="button" value="Reiniciar">
-        <div id="raposa" class="player" ></div>
+        <abbr title="Selecione outro jogador"><div id="p2" onclick="openmodal2()" class="player" ></div></abbr>
+    </div>
+
+    <div class="modalplayer" >
+        <!-- <div class="squaremodal" ></div> -->
+        <div class="s" >
+            <div  onclick="closemodal()" >
+                <!-- <img class="closemodal" src="cancel.png" alt="">  -->
+                <div class="closemodal"> </div>
+            </div>
+        </div>           
+        
     </div>
 
     
