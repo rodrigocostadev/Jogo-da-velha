@@ -94,6 +94,8 @@ function Reiniciar(){   //modificaçao rodrigo
         
         playertime = 0 // se 0 vai reinicia com lobo, se 1 reinicia com raposa
         player() // executa player para nao bugar e ficar trocado o jogador da vez
+        document.location.reload(true); 
+        //atualiza a pagina para o hover dos squares ficarem azuis (background-color)
 }
 
 function player(){

@@ -27,10 +27,12 @@ h2{
 }
 
 .square:hover{
+    /* background-color: aqua; */
+    background-color: #00ffff;
     transform: scale(1.06);
     transition: 200ms;
     cursor: pointer;
-    background-color: aqua;
+    
 }
 
 /* .o{} */
