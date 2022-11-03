@@ -2,6 +2,16 @@ let player1 = "" // Essa variável vai armazenar o icone escolhido pelo jogador 
 let player2 = "" // Já essa aqui, o  icone escolhido pelo jogador 1
 let playerEscolha = "" // A variável vai definir quem estar escolhendo o icone
 let playerJogada = "" // E essa aqui, qual é o player da vez
+let persons = [  
+    "\u{1F43A}","\u{1F98A}", "\u{1F435}",
+    "\u{1F436}","\u{1F99D}","\u{1F431}",
+    "\u{1F981}","\u{1F42F}","\u{1F434}",
+    "\u{1F984}","\u{1F993}","\u{1F42E}",
+    "\u{1F437}","\u{1F42D}","\u{1F439}",
+    "\u{1F430}","\u{1F43B}","\u{1F428}",
+    "\u{1F43C}","\u{1F423}","\u{1F98B}",
+    "\u{1F988}","\u{1F41D}","\u{1F41E}",  //padrão unicode
+  ];
 
 document.addEventListener("DOMContentLoaded", function(){
      //dom content loaded é um evento que executa o que esta na função apos o html ser carregado por completo
@@ -33,7 +43,7 @@ function handleclick(event){
 
     // Aqui ele verifica quem estar jogando, se jogador 0 ou 1
     if(playertime == 0){
-        playerJogada = 1 // Se for 0, ele coloca 0 na variável playerjogada
+        playerJogada = 0 // Se for 0, ele coloca 0 na variável playerjogada
     }else{
         playerJogada = 1 // Se for 1, ele coloca 1 na variável playerjogada
     }
@@ -42,7 +52,7 @@ function handleclick(event){
 
             setTimeout(()=>{
             alert ("O Jogo Acabou, Clique no botão REINICIAR para jogar novamente ")
-        },800) //depois de 200 milissegundos vai disparar o alerta de o jogo acabou
+        },1000) //depois de 200 milissegundos vai disparar o alerta de o jogo acabou
     }
 
     updatesquares(position) // ao clicar atualiza os squares   
@@ -117,123 +127,113 @@ function player(){
 
 function closemodal(){
     let modal = document.querySelector(".modalplayer")
-    modal.innerHTML = ""
+    // modal.innerHTML = ""
     modal.style.display = "none"
 }
 
 function openmodal1(){
     let modal = document.querySelector(".modalplayer")
     modal.style.display = "block"
-    playerselect1()    
+    playerEscolha = 0
+    escolhaIcon(playerEscolha)
+    // playerselect1()    
 }
 
 function openmodal2(){
     let modal = document.querySelector(".modalplayer")
     modal.style.display = "block"
-    playerselect2()
+    playerEscolha = 1
+    escolhaIcon(playerEscolha)
+    // playerselect2()
 } 
 
-function playerselect1(){
-    let squaresModal = document.querySelectorAll(".squaremodal")
-    let persons = [  
-        "\u{1F43A}",
-        "\u{1F98A}", 
-        "\u{1F435}",
-        "\u{1F436}",
-        "\u{1F99D}",
-        "\u{1F431}",
-        "\u{1F981}",
-        "\u{1F42F}",
-        "\u{1F434}",
-        "\u{1F984}",
-        "\u{1F993}",
-        "\u{1F42E}",
-        "\u{1F437}",
-        "\u{1F42D}",
-        "\u{1F439}",
-        "\u{1F430}",
-        "\u{1F43B}",
-        "\u{1F428}",
-        "\u{1F43C}",
-        "\u{1F43C}",
-        "\u{1F98B}",
-        "\u{1F988}",
-        "\u{1F41D}",
-        "\u{1F41E}",  //padrão unicode
-      ];
-    
-    for( i = 0 ; i < persons.length; i++){
-    // for (i in persons){
-        //adicionar quadrados junto do conteudo "codigos dos emojis" de acordo com o tamanho do array
+// function playerselect1(){
+function escolhaIcon(jogador){
+    if( jogador == 0){
         
-        let modal = document.querySelector(".modalplayer")
-        let div = document.createElement("div")
-        div.className = "squaremodal"
-        div.dataset.icon = persons[i]   //dataset é atributo personalizado, no caso a string do persons[i]
-        div.dataset.iconp1 = persons[i]
-        iconp1 = persons[i]
-        div.setAttribute("id", [i])
-        modal.appendChild(div)
-        console.log(div)
-                
+        for( i = 0 ; i < persons.length; i++){
+        // for (i in persons){
+            //adicionar quadrados junto do conteudo "codigos dos emojis" de acordo com o tamanho do array
+            
+            let modal = document.querySelector(".modalplayer")
+            let div = document.createElement("div")
+            div.className = "squaremodal"
+            div.dataset.icon = persons[i]   //dataset é atributo personalizado, no caso a string do persons[i]
+            // div.dataset.iconp1 = persons[i]
+            div.setAttribute("id", [i])
+            modal.appendChild(div)
+            console.log(div)
+
+            let squaremodal = document.querySelectorAll(".squaremodal")
+            for( let i = 0; i < squaremodal.length; i++){
+                squaremodal[i].addEventListener("click",function(){
+                    let p1 = document.getElementById("p1")
+                    player1 = persons[squaremodal[i].getAttribute("id")]
+
+                    p1.setAttribute("data-iconp1", player1)
+                    closemodal()
+                })
+            }
+            
+            
+            //ao clicar no square vai fechar a janela modal
+            // div.addEventListener("click",function(){
+            //     //ao clicar no square vai selecionar jogador
+            //     closemodal()
+            //     updatesquares() //atualiza os squares
+            // })                      
+                    
+        }    
+
     }
 
-    squaresModal.addEventListener("click",function(){
-        //ao clicar no square vai selecionar jogador
-        closemodal(posicao)
-    })
+    // function playerselect2(){
+    else if (jogador == 1 ){
+        
+        for( i = 0 ; i < persons.length; i++){
+        // for (i in persons){
+            //adicionar quadrados junto do conteudo "codigos dos emojis" de acordo com o tamanho do array
+            let modal = document.querySelector(".modalplayer")
+            let div = document.createElement("div")
+            div.className = "squaremodal"
+            div.dataset.icon = persons[i]   //dataset é atributo personalizado, no caso a string do persons[i]
+            // div.dataset.iconp2 = persons[i]
+            div.setAttribute("id", [i])
+            modal.appendChild(div)
+            console.log(div)
 
-    // if() //definir personagem inicial quando a pessoa nao quiser trocar de personagem
-    //    let personinitial =  document.querySelector("#p1").style.content
-    //     personinitial = 
+            let squaremodal = document.querySelectorAll(".squaremodal")
+            for( let i = 0; i < squaremodal.length; i++){
+                squaremodal[i].addEventListener("click",function(){
+                    let p2 = document.getElementById("p2")
+                    player2 = persons[squaremodal[i].getAttribute("id")]
+                    // E no p2, usaremos i setAttribute para adicionar a propriedade data-iconp2, e colocar o valor que estar em player1.
+                    p2.setAttribute("data-iconp2", player2)
+                    closemodal()
+                })
 
-    // openmodal()
-}
+            }
 
-function playerselect2(){
-    let persons = [  
-        "\u{1F43A}",
-        "\u{1F98A}", 
-        "\u{1F435}",
-        "\u{1F436}",
-        "\u{1F99D}",
-        "\u{1F431}",
-        "\u{1F981}",
-        "\u{1F42F}",
-        "\u{1F434}",
-        "\u{1F984}",
-        "\u{1F993}",
-        "\u{1F42E}",
-        "\u{1F437}",
-        "\u{1F42D}",
-        "\u{1F439}",
-        "\u{1F430}",
-        "\u{1F43B}",
-        "\u{1F428}",
-        "\u{1F43C}",
-        "\u{1F43C}",
-        "\u{1F98B}",
-        "\u{1F988}",
-        "\u{1F41D}",
-        "\u{1F41E}",  //padrão unicode
-      ];
-    
-    for( i = 0 ; i < persons.length; i++){
-    // for (i in persons){
-        //adicionar quadrados junto do conteudo "codigos dos emojis" de acordo com o tamanho do array
-        let modal = document.querySelector(".modalplayer")
-        let div = document.createElement("div")
-        div.className = "squaremodal"
-        div.dataset.icon = persons[i]   //dataset é atributo personalizado, no caso a string do persons[i]
-        div.dataset.iconp1 = persons[i]
-        iconp2 = persons[i]
-        div.setAttribute("id", [i])
-        modal.appendChild(div)
-        console.log(div)
-                
+            // adiciona o evento click para cada square da janela modal
+            // div.addEventListener("click",function(){
+            //     //ao clicar no square vai fechar a janela modal
+            //     closemodal()
+            //     updatesquares() //atualiza os squares
+            // })
+                    
+        }
+        
     }
-    
+
 }
+
+
+
+// if() //definir personagem inicial quando a pessoa nao quiser trocar de personagem
+        //    let personinitial =  document.querySelector("#p1").style.content
+        //     personinitial = 
+
+        // openmodal()
 
 
 
