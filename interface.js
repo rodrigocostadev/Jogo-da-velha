@@ -1,6 +1,6 @@
 let player1 = "" // Essa variável vai armazenar o icone escolhido pelo jogador 0
 let player2 = "" // Já essa aqui, o  icone escolhido pelo jogador 1
-let playerEscolha = "" // A variável vai definir quem estar escolhendo o icone
+let playerEscolha = "" // A variável vai definir quem esta escolhendo o icone
 let playerJogada = "" // E essa aqui, qual é o player da vez
 let persons = [  
     "\u{1F43A}","\u{1F98A}", "\u{1F435}",
@@ -21,19 +21,17 @@ document.addEventListener("DOMContentLoaded", function(){
     // query selector pega todos os seletores que foram solicitados, tem funcionamento parecido com getelementsbyclassname
     //let squares = document.getElementsByClassName("square")
 
-   
+    loadImage()// carrega as imagens dos jogadores da vez raposa e lobo
     player() // a função foi colocada aqui para o jogador da vez ja ficar selecionado antes do jogo começar
 
     squares.forEach(function(square){ //O método forEach() executa uma dada função em cada elemento de um array.
         square.addEventListener("click", handleclick)
-
 
         //1 FUNCIONAMENTO: depois do html(DOM) for carregado, o foreach vai 
         //varrer cada array (quadrado/square do tabuleiro/board)
         //cada quadrado square vai ter o evento click que vai rodar a função handleclick
     })
 })
-
 
 function handleclick(event){
     // console.log(event.target)  //event.target Obtem o elemento que acionou um evento 
@@ -68,14 +66,49 @@ function updatesquares (posicaoClicada) { // E aqui, eu posso colocar o argument
     let squares = document.querySelectorAll(".square")
 
     // squares.forEach(function(square){ //O método forEach() executa uma dada função em cada elemento de um array.
-    
-    // if (gameover == false){
         squares.forEach((square) => {
             let position = square.id
             let symbols = board[position]
 
+            let jogadorescolhido1 = localStorage.getItem("jogadorEscolhido1")
+            let jogadorescolhido2 = localStorage.getItem("jogadorEscolhido2")
+
+            // se symbols ja recebeu a posição clicada do board, ou diferente de nada.
             if(symbols !=''){
-                square.innerHTML = `<div class='${symbols}'><div/>`  // se o symbol nao for vazio, coloca raposa ou lobo
+                // Essa verificação, é se a posicaoClicada é igual ao square.id
+                if(posicaoClicada == position){
+                    //se o jogo foi reiniciado, carrega o ultimo jogador escolhido para os squares
+                    if(jogadorescolhido1 != '' && jogadorescolhido2 != ''){
+                        if(playerJogada == 0){
+                            square.innerHTML = `<div data-iconp1="${jogadorescolhido1}" class='${symbols}'><div/>`
+                        }else if(playerJogada == 1){
+                            square.innerHTML = `<div data-iconp2="${jogadorescolhido2}" class='${symbols}'><div/>`
+                        }
+                    }else{
+                        // Se o player da jogada for o 0 e o jogo ainda nao foi iniciado
+                        if(playerJogada == 0){
+                            square.innerHTML = `<div data-iconp1="${player1}" class='${symbols}'><div/>`
+                        }else if(playerJogada == 1){
+                            square.innerHTML = `<div data-iconp2="${player2}" class='${symbols}'><div/>`
+                        }
+                    }
+                    //se o jogo foi reiniciado, carrega o ultimo jogador escolhido atualiza os squares
+                    if(jogadorescolhido1 != '' && jogadorescolhido2 != ''){
+                        square.innerHTML = `<div data-iconp1="${jogadorescolhido1}" data-iconp2="${jogadorescolhido2}" class='${symbols}'><div/>`
+                    }
+                    // aqui define os personagens iniciais dos squares sendo eles nao tenham sido escolhidos ainda
+                    // lobo e raposa
+                    else if (player1 == ''){
+                        player1 = persons[0]
+                        player2 = persons[1]
+    
+                        square.innerHTML = `<div data-iconp1="${player1}" data-iconp2="${player2}" class='${symbols}'><div/>`
+                    }
+                    
+                    
+                }
+                
+                // square.innerHTML = `<div class='${symbols}'><div/>`  // se o symbol nao for vazio, coloca raposa ou lobo
             }
         }
     )
@@ -123,27 +156,79 @@ function player(){
         document.querySelector("#p2").style.scale = '1.4'
         // document.querySelector("#p2").style.content = "\u{1F98A}"
     }
+    
+}
+
+//aqui o icone inicial do jogador da vez
+function loadImage(){
+    
+    let jogadorescolhido1 = localStorage.getItem("jogadorEscolhido1")
+    let jogadorescolhido2 = localStorage.getItem("jogadorEscolhido2")
+
+    //se o jogo foi reiniciado, o jogador anterior ja foi escolhido, então carrega jogador anterior
+    if(jogadorescolhido1 != '' && jogadorescolhido2 != ''){
+
+        p1.textContent = `${jogadorescolhido1}`
+        p2.textContent = `${jogadorescolhido2}`
+
+        document.getElementById("p1").style.fontSize = "50px"
+        document.getElementById("p1").style.position = "relative"
+        document.getElementById("p1").style.lineHeight = "100px"
+        document.getElementById("p2").style.fontSize = "50px"
+        document.getElementById("p2").style.position = "relative"
+        document.getElementById("p2").style.lineHeight = "100px"
+    }
+
+    //se player 1 e 2 nao forem definidos/ escolhido ainda, lobo e raposa
+    else if (player1 == '' && player2 == ''){
+        let p1 = document.querySelector("#p1")
+        let p2 = document.querySelector("#p2")
+
+        player1 = persons[0]
+        player2 = persons[1]
+
+        // player1 = "\u{1F43A}" lobo
+        // player2 = "\u{1F98A}" raposa
+
+        p1.textContent = `${player1}`
+        p2.textContent = `${player2}`
+
+        document.getElementById("p1").style.fontSize = "50px"
+        document.getElementById("p1").style.position = "relative"
+        document.getElementById("p1").style.lineHeight = "100px"
+        document.getElementById("p2").style.fontSize = "50px"
+        document.getElementById("p2").style.position = "relative"
+        document.getElementById("p2").style.lineHeight = "100px"
+        
+    }
 }
 
 function closemodal(){
     let modal = document.querySelector(".modalplayer")
-    // modal.innerHTML = ""
+    modal.innerHTML = ""
     modal.style.display = "none"
 }
 
 function openmodal1(){
     let modal = document.querySelector(".modalplayer")
+    let p1 = document.querySelector("#p1")
     modal.style.display = "block"
     playerEscolha = 0
     escolhaIcon(playerEscolha)
+    p1.textContent = `` //ao abrir a janela modal apaga o lobo e coloca outro jogador da vez 
+
     // playerselect1()    
 }
 
 function openmodal2(){
     let modal = document.querySelector(".modalplayer")
+    let p2 = document.querySelector("#p2")
     modal.style.display = "block"
     playerEscolha = 1
     escolhaIcon(playerEscolha)
+    p2.textContent = `` //ao abrir a janela modal apaga a raposa e coloca outro jogador da vez
+
+
     // playerselect2()
 } 
 
@@ -171,11 +256,11 @@ function escolhaIcon(jogador){
                     player1 = persons[squaremodal[i].getAttribute("id")]
 
                     p1.setAttribute("data-iconp1", player1)
+                    localStorage.setItem("jogadorEscolhido1", player1)
                     closemodal()
                 })
             }
-            
-            
+                      
             //ao clicar no square vai fechar a janela modal
             // div.addEventListener("click",function(){
             //     //ao clicar no square vai selecionar jogador
@@ -186,7 +271,6 @@ function escolhaIcon(jogador){
         }    
 
     }
-
     // function playerselect2(){
     else if (jogador == 1 ){
         
@@ -209,31 +293,17 @@ function escolhaIcon(jogador){
                     player2 = persons[squaremodal[i].getAttribute("id")]
                     // E no p2, usaremos i setAttribute para adicionar a propriedade data-iconp2, e colocar o valor que estar em player1.
                     p2.setAttribute("data-iconp2", player2)
+                    localStorage.setItem("jogadorEscolhido2", player2)
                     closemodal()
                 })
 
             }
-
-            // adiciona o evento click para cada square da janela modal
-            // div.addEventListener("click",function(){
-            //     //ao clicar no square vai fechar a janela modal
-            //     closemodal()
-            //     updatesquares() //atualiza os squares
-            // })
                     
         }
         
     }
 
 }
-
-
-
-// if() //definir personagem inicial quando a pessoa nao quiser trocar de personagem
-        //    let personinitial =  document.querySelector("#p1").style.content
-        //     personinitial = 
-
-        // openmodal()
 
 
 
