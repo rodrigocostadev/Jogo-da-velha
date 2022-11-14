@@ -8,20 +8,10 @@ let gameover = false
 
 function handlemove(position){
 
-    // if (gameover){  //se gameover for verdadeiro acaba o jogo, caso contrario, roda normalmente
-    //     return
-    // }
-
-    // if (gameover){
-    //     board [position] = ''
-    //     playertime = 0
-
-    // }
-
     if(board[position] == ''){
 
     board[position] = symbols[playertime]
-
+    
     gameover = iswin() 
 
     if(gameover == false){  //se não houver vencedor, continua o jogo e troca a vez do jogador
@@ -34,14 +24,6 @@ function handlemove(position){
     player()
         
     }
-    
-    // if (playertime == 0 && playertime != 1 && board[position] == 'x' && board[position] != '' ){
-    //     document.querySelector("#lobo").style.backgroundColor = 'red'
-    //     document.querySelector("#raposa").style.backgroundColor = 'beige'
-    // }else{
-    //     document.querySelector("#lobo").style.backgroundColor = 'beige'
-    //     document.querySelector("#raposa").style.backgroundColor = 'red'
-    // }
 
     return gameover //retorna se o jogo acabou ou nao
 
@@ -91,7 +73,7 @@ function iswin(){
             board[pos0] == board[pos2] && 
             board[pos0] != '') //se posiçao 0 é igual a posição 1 e a posiçao 3 e é diferente de vazio
 
-            {  
+            {
             console.log(winner + " é a sequencia vencedora")  //modificaçao rodrigo 
             console.log(winner)  //modificaçao rodrigo 
             selecionados()  //modificaçao rodrigo 
