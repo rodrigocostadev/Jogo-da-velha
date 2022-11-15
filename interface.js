@@ -161,7 +161,7 @@ function updatesquares (posicaoClicada) { // E aqui, eu posso colocar o argument
 
     }
 
-function Reiniciar(){   //modificaçao rodrigo 
+function Reiniciar(){   //modificaçao rodrigo. 
 
         let squares = document.querySelectorAll(".square")     
         
