@@ -86,6 +86,9 @@ function updatesquares (posicaoClicada) { // E aqui, eu posso colocar o argument
 
     let squares = document.querySelectorAll(".square")
 
+    console.log(player1)
+    console.log(player2)
+
     // squares.forEach(function(square){ //O método forEach() executa uma dada função em cada elemento de um array.
         squares.forEach((square) => {
             let position = square.id
@@ -110,24 +113,57 @@ function updatesquares (posicaoClicada) { // E aqui, eu posso colocar o argument
             //         square.innerHTML = `<div data-iconp2="${player2}" class='${symbols}'><div/>`
             //     }
             // }
-        
+            
+            if(symbols == '' ){
+                //SE É A PRIMEIRA VEZ DO JOGADOR NO JOGO:
+                   // aqui define o primeiro click do square(personagens iniciais dos squares sendo eles nao tenham sido escolhidos ainda)
+                   // lobo e raposa
+
+                
+                    // if (firstPlayInterface == null && player1 == '' && player2 == '' ){
+
+                    //     player1 = persons[0]
+                    //     player2 = persons[1]
+
+                    //     square.innerHTML = `<div data-iconp1="${player1}" data-iconp2="${player2}" class='${symbols}'><div/>`
+
+                    // }
+                    // else if(player1 == ''){
+
+                    //     player1 = persons[0]
+                    //     player2 = persons[1]
+
+                    //     square.innerHTML = `<div data-iconp1="${player1}" data-iconp2="${player2}" class='${symbols}'><div/>`
+                    // }
+                   
+
+                //     //se alterar o jogador 1 o outro jogador continua o mesmo
+                //     else if ( firstPlayInterface1 == 0.5 && firstPlayInterface2 == 0 && jogadorescolhido1 != ''){
+
+                //         if(playerJogada == 0){
+                //             square.innerHTML = `<div data-iconp1="${player1}" class='${symbols}'><div/>`
+                //         }else if(playerJogada == 1){
+                //             square.innerHTML = `<div data-iconp2="${player2}" class='${symbols}'><div/>`
+                //         }
+                //     }
+                // }
+
+                // //Se alterar jogador 2 o outro jogador continua o mesmo
+                // else if ( firstPlayInterface1 == 0 && firstPlayInterface2 == 0.5 && jogadorescolhido2 != '' ){
+                    
+                //     if(playerJogada == 0){
+                //         square.innerHTML = `<div data-iconp1="${player1}" class='${symbols}'><div/>`
+                //     }else if(playerJogada == 1){
+                //         square.innerHTML = `<div data-iconp2="${player2}" class='${symbols}'><div/>`
+                //     }
+                
+           }
 
             // se symbols ja recebeu a posição clicada do board, ou diferente de nada.
-            if(symbols !=''){
+            else if(symbols !=''){
                 // Essa verificação, é se a posicaoClicada é igual ao square.id
-                if(posicaoClicada == position){
-
-                    //SE É A PRIMEIRA VEZ DO JOGADOR NO JOGO:
-                    // aqui define o primeiro click do square(personagens iniciais dos squares sendo eles nao tenham sido escolhidos ainda)
-                    // lobo e raposa
-                    if (firstPlayInterface == null ){
-
-                        player1 = persons[0]
-                        player2 = persons[1]
-
-                        square.innerHTML = `<div data-iconp1="${player1}" data-iconp2="${player2}" class='${symbols}'><div/>`
-
-                    }
+                if(posicaoClicada == position){                       
+                    //////////////////////////////////////////////////////////////////////////////////////////////////
 
                     //se o jogo foi reiniciado, carrega o ultimo jogador escolhido para os squares
                     if(jogadorescolhido1 != '' && jogadorescolhido2 != ''  && firstPlayInterface == 1){
@@ -144,8 +180,9 @@ function updatesquares (posicaoClicada) { // E aqui, eu posso colocar o argument
                         }else if(playerJogada == 1){
                             square.innerHTML = `<div data-iconp2="${player2}" class='${symbols}'><div/>`
                         }
-                    }                             
-
+                    }   
+                    
+                   //////////////////////////////////////////////////////////////////////////////////////////////////
 
 
                     //se alterar o jogador 1 o outro jogador continua o mesmo
@@ -166,6 +203,23 @@ function updatesquares (posicaoClicada) { // E aqui, eu posso colocar o argument
                             square.innerHTML = `<div data-iconp2="${player2}" class='${symbols}'><div/>`
                         }
                     }
+
+                    //////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+                    //define o primeiro click para aparecer o lobo
+                    // aqui define o primeiro click do square(personagens iniciais dos squares sendo eles nao tenham sido escolhidos ainda)
+                   // lobo e raposa
+                   if (player1 == '' && player2 == '' && firstPlayInterface == null ){
+                    //if (firstPlayInterface == null && 
+
+                    player1 = persons[0]
+                    player2 = persons[1]
+
+                    square.innerHTML = `<div data-iconp1="${player1}" data-iconp2="${player2}" class='${symbols}'><div/>`
+
+                }
                     
                 }
                 
@@ -250,7 +304,7 @@ function loadImage(){
     }
 
     //se é a primeira vez que a pessoa esta jogando, lobo e raposa
-    else if( firstPlayInterface == null || firstPlayInterface1 == null && firstPlayInterface2 == null) {
+    else if( firstPlayInterface == null ) {
         let p1 = document.querySelector("#p1")
         let p2 = document.querySelector("#p2")
 
@@ -286,7 +340,7 @@ function closemodal(){
 
 function openmodal1(){
 
-    if (firstPlayInterface < 1){
+    if (firstPlayInterface > 1){
         firstPlayInterface = 0
     }
 
@@ -296,10 +350,10 @@ function openmodal1(){
     playerEscolha = 0
     escolhaIcon(playerEscolha)
     p1.textContent = `` //ao abrir a janela modal apaga o lobo e coloca outro jogador da vez 
-    firstplay += 0.5 // o jogador ja jogou o jogo pela primeira vez
+    firstplay = 1 // o jogador ja jogou o jogo pela primeira vez
     localStorage.setItem("firstPlayInterface", firstplay)
     localStorage.setItem("firstPlayInterface1", firstplay)
-
+    console.log(firstPlayInterface)
     
 
     // playerselect1()    
@@ -307,7 +361,7 @@ function openmodal1(){
 
 function openmodal2(){
 
-    if (firstPlayInterface < 1){
+    if (firstPlayInterface > 1){
         firstPlayInterface = 0
     }
 
@@ -317,10 +371,11 @@ function openmodal2(){
     playerEscolha = 1
     escolhaIcon(playerEscolha)
     p2.textContent = `` //ao abrir a janela modal apaga a raposa e coloca outro jogador da vez
-    firstplay += 0.5 // o jogador ja jogou o jogo pela primeira vez então incrementa 0,5
+    firstplay = 1 // o jogador ja jogou o jogo pela primeira vez então incrementa 0,5
     //quando completar 1
     localStorage.setItem("firstPlayInterface", firstplay)
     localStorage.setItem("firstPlayInterface2", firstplay)    
+    console.log(firstPlayInterface)
 
     // playerselect2()
 } 
