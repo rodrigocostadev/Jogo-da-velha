@@ -7,9 +7,9 @@ let playerJogada = "" // E essa aqui, qual é o player da vez
 let firstplay = 0 // variavel que indica se é a primeira vez que o usuario esta jogando o jogo, 0 é primeira vez
 
 // funçao modal ocorre isso :
-// firstplay += 0.5
+// firstplay =1
 // localStorage.setItem("firstPlayInterface", firstplay) 
-//salva como variavel firstplay recebe 0.5
+//salva como variavel firstplay recebe 1
 
 // variavel geral que indica se é a primeira vez que o usuario esta jogando o jogo
 let firstPlayInterface = localStorage.getItem("firstPlayInterface") 
@@ -97,70 +97,9 @@ function updatesquares (posicaoClicada) { // E aqui, eu posso colocar o argument
             let firstPlayInterface = localStorage.getItem("firstPlayInterface")
             let jogadorescolhido1 = localStorage.getItem("jogadorEscolhido1")
             let jogadorescolhido2 = localStorage.getItem("jogadorEscolhido2") 
-            
-            // if(symbols == ''){
 
-            //     player1 = persons[0]
-            //     player2 = persons[1]
-                
-            //     // player1 = "\u{1F43A}" lobo
-            //     // player2 = "\u{1F98A}" raposa
-                
-            //     // Se o player da jogada for o 0 e o jogo ainda nao foi iniciado
-            //     if(playerJogada == 0){
-            //         square.innerHTML = `<div data-iconp1="${player1}" class='${symbols}'><div/>`
-            //     }else if(playerJogada == 1){
-            //         square.innerHTML = `<div data-iconp2="${player2}" class='${symbols}'><div/>`
-            //     }
-            // }
-            
-            if(symbols == '' ){
-                //SE É A PRIMEIRA VEZ DO JOGADOR NO JOGO:
-                   // aqui define o primeiro click do square(personagens iniciais dos squares sendo eles nao tenham sido escolhidos ainda)
-                   // lobo e raposa
-
-                
-                    // if (firstPlayInterface == null && player1 == '' && player2 == '' ){
-
-                    //     player1 = persons[0]
-                    //     player2 = persons[1]
-
-                    //     square.innerHTML = `<div data-iconp1="${player1}" data-iconp2="${player2}" class='${symbols}'><div/>`
-
-                    // }
-                    // else if(player1 == ''){
-
-                    //     player1 = persons[0]
-                    //     player2 = persons[1]
-
-                    //     square.innerHTML = `<div data-iconp1="${player1}" data-iconp2="${player2}" class='${symbols}'><div/>`
-                    // }
-                   
-
-                //     //se alterar o jogador 1 o outro jogador continua o mesmo
-                //     else if ( firstPlayInterface1 == 0.5 && firstPlayInterface2 == 0 && jogadorescolhido1 != ''){
-
-                //         if(playerJogada == 0){
-                //             square.innerHTML = `<div data-iconp1="${player1}" class='${symbols}'><div/>`
-                //         }else if(playerJogada == 1){
-                //             square.innerHTML = `<div data-iconp2="${player2}" class='${symbols}'><div/>`
-                //         }
-                //     }
-                // }
-
-                // //Se alterar jogador 2 o outro jogador continua o mesmo
-                // else if ( firstPlayInterface1 == 0 && firstPlayInterface2 == 0.5 && jogadorescolhido2 != '' ){
-                    
-                //     if(playerJogada == 0){
-                //         square.innerHTML = `<div data-iconp1="${player1}" class='${symbols}'><div/>`
-                //     }else if(playerJogada == 1){
-                //         square.innerHTML = `<div data-iconp2="${player2}" class='${symbols}'><div/>`
-                //     }
-                
-           }
-
-            // se symbols ja recebeu a posição clicada do board, ou diferente de nada.
-            else if(symbols !=''){
+            // se symbols ja recebeu a posição clicada do board, ou diferente de nada. 
+            if(symbols !=''){
                 // Essa verificação, é se a posicaoClicada é igual ao square.id
                 if(posicaoClicada == position){                       
                     //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -252,8 +191,6 @@ function Reiniciar(){   //modificaçao rodrigo.
         })
         
         playertime = 0 // se 0 vai reinicia com lobo, se 1 reinicia com raposa
-        // firstplay = 1
-        // localStorage.setItem("firstPlayInterface", firstplay)
         player() // executa player para nao bugar e ficar trocado o jogador da vez
         document.location.reload(true); //atualiza a pagina para o hover dos squares ficarem azuis (background-color)
 
@@ -338,11 +275,7 @@ function closemodal(){
     modal.style.display = "none"
 }
 
-function openmodal1(){
-
-    if (firstPlayInterface > 1){
-        firstPlayInterface = 0
-    }
+function openmodal1(){    
 
     let modal = document.querySelector(".modalplayer")
     let p1 = document.querySelector("#p1")
@@ -359,11 +292,7 @@ function openmodal1(){
     // playerselect1()    
 }
 
-function openmodal2(){
-
-    if (firstPlayInterface > 1){
-        firstPlayInterface = 0
-    }
+function openmodal2(){   
 
     let modal = document.querySelector(".modalplayer")
     let p2 = document.querySelector("#p2")
